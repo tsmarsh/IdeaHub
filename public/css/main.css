@@ -1,3 +1,3 @@
-body {
-  background-color: #ececec;
-  color: #b1b1b1; }
+.column {
+  float: left;
+  width: 13%; }

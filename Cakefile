@@ -36,8 +36,6 @@ task 'watch', 'Watch .coffee and compress them on the fly', ->
     coffee_client.on 'exit', log
 
     sass_client = spawn 'sass', ['--watch', 'src/sass:public/css' ]
-    sass_client.stdout.on 'data', console.log
-    sass_client.stderr.on 'data', console.log
     sass_client.on 'exit', console.log
 
 task 'build', 'Create the .nw', ->

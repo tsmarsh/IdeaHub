@@ -1,11 +1,28 @@
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<title>IdeaHub</title>
 		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<script src="js/knockout.js"></script>
 		<script src="js/idea-hub.js"></script>
 	</head>
 	<body>
-		<h1>I am a heading!</h1>
+		<header>
+			<h1>IdeaHub</h1>
+		</header>
+		<ol class="columns unstyled inline" data-bind="foreach: columns">
+				<li class="column">
+						<h2 data-bind="text: title"></h2>
+						<ol class="cards" data-bind="foreach: cards">
+							<li class="card">
+								<p data-bind="text: description"></p>
+							</li>
+						</ol>
+						<a data-bind="click: addCard">Add a card</a>
+				</li>
+		</ol>
 	</body>
 </html>
