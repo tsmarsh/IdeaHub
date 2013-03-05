@@ -14,14 +14,14 @@
 			<h1>IdeaHub</h1>
 		</header>
 		<ol class="columns unstyled inline" data-bind="foreach: columns">
-				<li class="column">
-						<h2 data-bind="text: title"></h2>
-						<ol class="cards" data-bind="foreach: cards">
+				<li class="column span4">
+						<h3 data-bind="text: title"></h3>
+						<ol class="cards well" data-bind="foreach: cards">
 							<li class="card">
 								<p data-bind="text: description"></p>
 							</li>
 						</ol>
-						<a data-bind="click: addCard">Add a card</a>
+						<a class="btn" data-bind="click: addCard">Add a card</a>
 				</li>
 		</ol>
 	</body>
