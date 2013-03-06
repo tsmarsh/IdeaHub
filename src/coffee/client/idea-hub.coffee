@@ -1,13 +1,22 @@
-Card = (@description) ->
+Card = (description) ->
+	@description = ko.observable(description)
 	@
 
 Column = (title, @cards) ->
 	@title = ko.observable(title)
 	@addCard = =>
-		@cards.push(new Card("Please add details"))
+		@cards.push(ko.observable(new Card("")))
 	@
 
 Page = (@columns) ->
+	$('#cardModal').modal
+			keyboard: true
+			show: false
+
+	@setCurrentCard = (data) =>
+		console.log(data)
+		@currentCard(data)
+		$('#cardModal').modal 'show'
 	@
 
 $ ->

@@ -18,7 +18,7 @@
 						<h3 data-bind="text: title"></h3>
 						<ol class="cards well" data-bind="foreach: cards">
 							<li class="card">
-								<p data-bind="text: description"></p>
+								<input placeholder="Please add a description" data-bind="value: description, click: $root.setCurrentCard"></input>
 							</li>
 						</ol>
 						<a class="btn" data-bind="click: addCard">Add a card</a>
