@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<title>IdeaHub</title>
 		<script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/knockout.js"></script>
 		<script src="js/idea-hub.js"></script>
@@ -13,16 +14,38 @@
 		<header>
 			<h1>IdeaHub</h1>
 		</header>
-		<ol class="columns unstyled inline" data-bind="foreach: columns">
-				<li class="column span4">
-						<h3 data-bind="text: title"></h3>
-						<ol class="cards well" data-bind="foreach: cards">
-							<li class="card">
-								<input placeholder="Please add a description" data-bind="value: description, click: $root.setCurrentCard"></input>
-							</li>
-						</ol>
-						<a class="btn" data-bind="click: addCard">Add a card</a>
-				</li>
-		</ol>
+
+
+<div id="main">
+    <ul class="labels unstyled inline span10" data-bind="foreach: labels">
+    	<li class="tasklabel span3">
+				<h3 data-bind="text: title"></h3>
+				<ul class="container well unstyled span2" data-bind="template: { name: 'taskTmpl', foreach: tasks }, 
+																														 sortableList: tasks"></ul>
+			</li>
+    </ul>
+    <a class="btn" data-bind="click: addTask">Add a task</a>
+
+    
+    <script id="taskTmpl" type="text/html">
+        <li class="task" data-bind="sortableItem: { item: $data, parentList: $parent.tasks }" >
+            <p data-bind="text: description, 
+            											 click: $root.selectTask, 
+            											 visible: $data !== $root.selectedTask()"></p>
+
+            <input placeholder="Description" 
+            			 data-bind="value: description, 
+            									visibleAndSelect: $data === $root.selectedTask(), 
+            									event: { blur: $root.clearSelectedTask }" />
+        </li>
+    </script>
+    
+</div>    
+
 	</body>
 </html>
+
+
+
+
+

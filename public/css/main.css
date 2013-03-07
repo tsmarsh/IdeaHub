@@ -1,2 +1,9 @@
-.column {
+tasklabel {
   float: left; }
+
+.task {
+  background-color: white;
+  border-radius: .25em;
+  padding: 0.25em;
+  margin: 0.25em;
+  color: #7a8288; }
