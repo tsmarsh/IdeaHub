@@ -25,8 +25,7 @@
 			</li>
     </ul>
     <a class="btn" data-bind="click: addTask">Add a task</a>
-
-    
+</div>    
     <script id="taskTmpl" type="text/html">
         <li class="task" data-bind="sortableItem: { item: $data, parentList: $parent.tasks }" >
             <p data-bind="text: description, 
@@ -39,9 +38,6 @@
             									event: { blur: $root.clearSelectedTask }" />
         </li>
     </script>
-    
-</div>    
-
 	</body>
 </html>
 

@@ -1,3 +1,5 @@
+fs = require 'fs'
+
 Task = (description) ->
   @description = ko.observable(description)
   @
@@ -7,11 +9,18 @@ Label = (title, tasks) ->
   @tasks = ko.observableArray(tasks)
   @
 
-ViewModel = () ->
-  todoTasks = new Label("To do", [new Task("Get dog food"), new Task("Mow lawn"), new Task("Fix car")])
-  doingTasks= new Label("Doing", [new Task("Fix fence"), new Task("Walk dog"), new Task("Read book")])
-  doneTasks = new Label("Done", [])
-  @labels = ko.observableArray([todoTasks, doingTasks, doneTasks])
+ViewModel = (tasks) ->
+  labels = {}
+  for task in tasks
+    t = new Task(task.description)
+    for label in task.labels
+      if labels.hasOwnProperty(label)
+        labels[label].push(t)
+      else
+        labels[label] = [t]
+
+  console.log("labels: ", labels)
+  @labels = ko.observableArray(new Label(title, tasks) for title, tasks of labels)
   
   @selectedTask =  ko.observable()
   
@@ -61,4 +70,20 @@ ko.bindingHandlers.visibleAndSelect =
       ), 0 #new tasks are not in DOM yet
 
 $ ->
-  ko.applyBindings( new ViewModel())
+  ideahub_path = './.ideahub'
+
+  fs.exists ideahub_path, (exists) ->
+    fs.mkdir(ideahub_path) unless exists
+    fs.readdir(ideahub_path, (err, files) -> 
+      console.log(files))
+
+  tasks = [
+    {description: "Get dog food", labels: ["To do"]},
+    {description: "Mow lawn", labels: ["To do"]},
+    {description: "Fix car", labels: ["To do"]},
+    {description: "Fix fence", labels: ["Doing"]},
+    {description: "Walk dog", labels: ["Doing"]},
+    {description: "Read book", labels: ["Doing"]}
+  ]
+
+  ko.applyBindings( new ViewModel(tasks))
